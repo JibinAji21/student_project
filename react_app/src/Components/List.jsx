@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
 import axios from 'axios'
-
+import Add from "./Add"
 
 function List(){
     const [data,SetData] = useState([])
@@ -50,13 +50,13 @@ function List(){
                     ))}
                 </tbody>
             </table>
-            {editing ? <EditForm curTask= {editdata} updatefun={updateDtls}/>:null}
+            {editing ? <EditForm curTask= {editdata} updatefun={updateDtls}/>:<Add/>}
         </div>
     )
 
 }
 
-const EditForm=({curTask,updataefun})=>{
+const EditForm=({curTask,updatefun})=>{
     const[task,setTask]=useState(curTask)
     const handleChange = (e) =>{
         const {name,value} = e.target 
@@ -64,7 +64,7 @@ const EditForm=({curTask,updataefun})=>{
     }
     const handleSubmit = (e) =>{
         e.preventDefault()
-        updataefun(task.id,task)
+        updatefun(task.id,task)
     }
     return(
         <form onSubmit={handleSubmit}>
